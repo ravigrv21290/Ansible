@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  become: true
+  become_user: root
+  become_method: sudo
+  tasks:
+  - name: Stopping the Application(ctm_stop.sh)
+    shell: /opt/aptm/ctm_stop.sh > /tmp/out2 2>&1
+    register: app_check
+  - debug: msg="CTM Application stopped successfully"
+    when: app_check.rc ====0
+  - name: Log messages for application
+    command: cat /tmp/out2
+    register: logmessages
+  - debug: msg= "{{ logmessages.stdout_lines }}"

@@ -1,0 +1,5 @@
+---
+# tasks file for roles/postgres
+- import_tasks: httpd.yml
+- import_tasks: config.yml
+- import_tasks: service.yml
